@@ -1,0 +1,98 @@
+/**
+ * Component: Overlay
+ */
+
+
+/* OVERLAY */
+.novi-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: auto;
+    width: 80%;
+    z-index: 1010;
+    transform: translate(-50%, -50%);
+    background: white;
+    // animation-delay: .3s;
+    animation-name: fadeZoomIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+
+    &__content {
+        overflow: hidden;
+        position: relative;
+        transition: all .3s;
+    }
+
+    &__scroll {
+        padding: 20px;
+        padding-bottom: 56.25%;
+        height: 0;
+        position: relative;
+        overflow: auto;
+        webkit-overflow-scrolling: touch;
+
+        iframe {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+
+/* CLOSE BUTTON */
+.novi-overlay-close {
+    background: black;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    padding: 1px 0 0;
+    z-index: 1;
+    border-radius: 50%;
+    border: 0;
+    transition: background .3s;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDMxLjExMiAzMS4xMTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMxLjExMiAzMS4xMTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMjRweCIgaGVpZ2h0PSIyNHB4Ij4KPHBvbHlnb24gcG9pbnRzPSIzMS4xMTIsMS40MTQgMjkuNjk4LDAgMTUuNTU2LDE0LjE0MiAxLjQxNCwwIDAsMS40MTQgMTQuMTQyLDE1LjU1NiAwLDI5LjY5OCAxLjQxNCwzMS4xMTIgMTUuNTU2LDE2Ljk3ICAgMjkuNjk4LDMxLjExMiAzMS4xMTIsMjkuNjk4IDE2Ljk3LDE1LjU1NiAiIGZpbGw9IiNGRkZGRkYiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==);
+
+    &:hover {
+        background-color: lighten(black, 15%);
+    }
+}
+
+
+/* BACKDROP */
+.novi-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, .75);
+    animation: fadeIn .3s forwards;
+}
+
+/* HELPER CLASSES */
+.no-scroll { position: fixed; }
+@keyframes fadeZoomIn {
+    from { opacity: 0; transform: scale(0 translate(-50%, -50%)); }
+    to { opacity: 1; transform: scale(1) translate(-50%, -50%); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

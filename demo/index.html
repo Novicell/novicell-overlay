@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Novicell Overlay</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet/less" type="text/css" href="/less/novicell.overlay.less">
+  <link rel="stylesheet/less" type="text/css" href="/demo/sample-styles.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"  type="text/javascript"></script>
+</head>
+<body>
+
+  <div>
+    <a class="open-overlay--url button" href="/demo/test.html">Open URL in overlay</a>
+    <button class="open-overlay button" data-element="#js-overlay-content" type="button">Open selector overlay</button>
+    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor iure earum deserunt excepturi facilis nemo debitis laboriosam explicabo quo. Fugiat error dicta, molestiae numquam adipisci sit provident beatae? Facere, voluptatem.</div>
+    <div>Aliquam eaque incidunt ratione. Dolores odio quaerat fugit laboriosam, incidunt aspernatur atque placeat nemo similique, minima, necessitatibus numquam magni tenetur et veniam architecto. Incidunt, minima commodi harum atque eius, reiciendis.</div>
+    <div>Illum aliquam hic rerum qui eaque temporibus necessitatibus modi nam ad quam. Mollitia eum molestiae a provident. Dolorum nostrum, doloribus, quam, quibusdam ex, officiis expedita sint impedit odit hic commodi?</div>
+    <div>Suscipit impedit cumque deserunt debitis eum illum, dolorem repudiandae facilis, iusto voluptatum nisi repellendus quaerat nesciunt esse necessitatibus incidunt. Tenetur culpa aspernatur esse magni corporis recusandae fuga nobis ut facere!</div>
+    <div>Esse dolores corporis cum dignissimos fugiat, quos, architecto quisquam, maiores consequatur suscipit, expedita laboriosam ratione doloribus culpa. Sit ab atque porro temporibus numquam, aliquam a quis eligendi facilis id et.</div>
+    <div>Autem, debitis eos laudantium facilis enim quisquam, voluptas rem quibusdam officiis aperiam? Iure quis, fuga quas modi veritatis id itaque ipsa tempore sapiente. Dolore praesentium itaque distinctio, in, ab nisi!</div>
+    <div>Dolorum deleniti cumque perspiciatis, eius nostrum, molestias adipisci expedita id magnam dignissimos ab, veritatis assumenda sequi suscipit reiciendis reprehenderit. Totam odio at ut fugiat minus eveniet pariatur fuga, doloribus explicabo.</div>
+    <div>Consequuntur eos dolore, quidem quod ipsa at repellendus, numquam dolor necessitatibus voluptatibus molestiae qui ea deserunt culpa, eligendi soluta non. Sed molestias illo et, praesentium quod commodi ab minima debitis.</div>
+    <div>Suscipit corrupti, sapiente reiciendis ipsum aut corporis, doloremque quo eos sunt quos magnam! Ea autem, asperiores reiciendis fugiat doloremque eaque. Omnis laboriosam eligendi, magni, et repellat porro ipsa inventore atque!</div>
+    <div>Vel officia, quas aperiam est iste corporis modi, cum hic debitis facilis in amet eum, libero doloremque praesentium accusamus minus explicabo? Nemo dicta sit temporibus, eaque perferendis non iusto fuga.</div>
+  </div>
+
+  <div class="overlay-content" id="js-overlay-content" style="display: none;">
+    This is the overlay content, loaded from a HTML selector.
+  </div>
+
+  <script src="../js/novicell.overlay.js"></script>
+
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+      // Selector overlay
+      var a = document.querySelector('.open-overlay');
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        var t = performance.now();
+        novicell.overlay.create({
+          'selector': a.getAttribute('data-element'),
+          'class': 'selector-overlay',
+          "onCreate": function() { console.log('created'); },
+          "onLoaded": function() { console.log('loaded'); },
+          "onDestroy": function() { console.log('Destroyed'); }
+        });
+      });
+
+      // URL overlay
+      var b = document.querySelector('.open-overlay--url');
+      b.addEventListener('click', function(e){
+      e.preventDefault();
+        novicell.overlay.create({
+          'url': b.getAttribute('href'),
+          'class': 'url-overlay'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -29,20 +29,20 @@ body {
   text-decoration: none;
   color: white;
   transition: box-shadow .25s ease-in-out;
-
-  &:not(:last-child) {
-    margin-right: 30px;
-  }
-
-  &:hover,
-  &:focus,
-  &:active {
-    outline: none;
-    cursor: pointer;
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
-  }
-
-  &--red { background-color: #E62117; }
-  &--blue { background-color: #17272E; }
-  &--orange { background-color: #EF8A17; }
 }
+
+.button:not(:last-child) {
+  margin-right: 30px;
+}
+
+.button:hover,
+.button:focus,
+.button:active {
+  outline: none;
+  cursor: pointer;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+.button--red { background-color: #E62117; }
+.button--blue { background-color: #17272E; }
+.button--orange { background-color: #EF8A17; }

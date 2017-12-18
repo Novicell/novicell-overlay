@@ -41,17 +41,41 @@ Set
 Then call the `novicell.overlay.set()`-method when you need to open the overlay.
 **Example:**
 ```javascript
-document.addEventListener("DOMContentLoaded", function() {
-    var overlayTriggers = document.querySelectorAll('.open-overlay');
+// Waiting for the DOM to load
+document.addEventListener("DOMContentLoaded", function () {
 
-    for (var i = 0; i < overlayTriggers.length; i++) {
-        var element = overlayTriggers[i];
+    // Select your overlay trigger
+    var trigger = document.querySelector('#js-overlay-trigger');
+    
+    trigger.addEventListener('click', function(e){
+    e.preventDefault();
 
-        element.addEventListener(function() {
-            novicell.overlay.set({ 'content':element.getAttribute('href'), 'class':'overlay-test' });
+    novicell.overlay.create({
+            'selector': trigger.getAttribute('data-element'),
+            'class': 'selector-overlay',
+            "onCreate": function() { console.log('created'); },
+            "onLoaded": function() { console.log('loaded'); },
+            "onDestroy": function() { console.log('Destroyed'); }
+        });
+    });
+
+    // Video overlay
+    var videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
+
+    for (var i = 0; i < videoOverlayTriggers.length; i++) {
+        videoOverlayTriggers[i].addEventListener('click', function(e){
+            e.preventDefault();
+
+            var currentTrigger = e.target;
+
+            novicell.overlay.create({
+            'videoId': currentTrigger.getAttribute('data-video-id'),
+            'type': currentTrigger.getAttribute('data-type'),
+            'class': 'video-overlay'
+            });
         });
     }
-    ...
+
 });
 ```
 

@@ -3,7 +3,7 @@
 
 ## Usage
 
-Written in pure Vanilla JS, it has *no dependencies*. It ships with a sample LESS file, for easy implementation with the [novicell-frontend setup](https://github.com/Novicell/novicell-frontend). Use the styles for inspiration and then make your own styles.
+Written in pure Vanilla JS, it has *no dependencies*. It ships with a sample POST-CSS file, for easy implementation with the [novicell-frontend setup](https://github.com/Novicell/novicell-frontend). Use the styles for inspiration and then make your own styles.
 
 ### Install with npm
 

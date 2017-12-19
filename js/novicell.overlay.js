@@ -54,10 +54,10 @@ novicell.overlay = novicell.overlay || new function () {
                 isVideo = true;
 
                 if(options.type == 'vimeo') {
-                    src = 'https://player.vimeo.com/video/' + options.videoId;
+                    src = 'https://player.vimeo.com/video/' + options.videoId + '?autoplay=' + options.autoplay;
                 }
                 else if(options.type == 'youtube') {
-                    src = 'https://www.youtube.com/embed/' + options.videoId +'?ecver=2';
+                    src = 'https://www.youtube.com/embed/' + options.videoId + '?autoplay=' + options.autoplay + '&rel=0';
                 }
                 else {
                     return;

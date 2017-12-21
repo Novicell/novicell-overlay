@@ -1,6 +1,6 @@
 {
   "name": "novicell-overlay",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple script that can open an overlay / modal",
   "main": "js/novicell.overlay.js",
   "scripts": {

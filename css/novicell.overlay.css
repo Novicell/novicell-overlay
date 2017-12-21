@@ -62,7 +62,6 @@
         animation-name: fadeZoomIn;
         animation-duration: .4s;
         opacity: 0;
-        // animation-delay: .15s;
         animation-fill-mode: forwards;
         animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 

@@ -1,0 +1,25 @@
+{
+  "name": "novicell-overlay",
+  "version": "1.0.1",
+  "description": "Simple script that can open an overlay / modal",
+  "main": "js/novicell.overlay.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Novicell/novicell-overlay.git"
+  },
+  "keywords": [
+    "modal",
+    "overlay",
+    "novicell",
+    "novicell-overlay"
+  ],
+  "author": "Novicell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Novicell/novicell-overlay/issues"
+  },
+  "homepage": "https://github.com/Novicell/novicell-overlay#readme"
+}

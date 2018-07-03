@@ -1,4 +1,7 @@
 # Novicell Overlay
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Novicell/novicell-overlay.svg)](https://greenkeeper.io/)
+
 **Simple script that can open an overlay / modal**
 
 ## Usage

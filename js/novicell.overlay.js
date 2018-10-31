@@ -2,7 +2,7 @@
 /**
  * @name Novicell overlay
  * @desc Simple script that opens an overlay / modal with some content form either a selector or an URL
- * @author Danni Larsen (DLA), Michael Sølvsteen (MSL), Signe Helbo Poulsen (SHP)
+ * @author Danni Larsen (DLA), Michael Sølvsteen (MSL), Signe Helbo Poulsen (SHP), Emil Skytte Ankersen (EAN)
  * @example novicell.overlay.create({ 'selector': SELECTOR, 'url': URL,  'class':'CLASSNAME', 'onCreate': FUNCTIONNAME, 'onLoaded': FUNCTIONNAME, 'onDestroy': FUNCTIONNAME });
  * @requires none
  */
@@ -47,7 +47,20 @@ novicell.overlay = novicell.overlay || new function () {
                 return;
             }
         }
-        // Or if content comes from an URL
+        
+        else if (options.hasOwnProperty('element') && options.element !== null) {
+            var element = options.element;
+
+            if (element) {
+                content = element.innerHTML;
+                constructOverlay();
+            } else {
+                console.warn('novicell.overlay: element does not exist. Please provide a valid selector for use in document.querySelector.');
+                return;
+            }
+        }
+        
+        // Or if content comes from an ID
         else if (options.hasOwnProperty('videoId')) {
             if (options.videoId !== null) {
                 var src = '';

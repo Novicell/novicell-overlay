@@ -47,7 +47,7 @@ novicell.overlay = novicell.overlay || new function () {
                 return;
             }
         }
-        
+       
         else if (options.hasOwnProperty('element') && options.element !== null) {
             var element = options.element;
 
@@ -55,7 +55,7 @@ novicell.overlay = novicell.overlay || new function () {
                 content = element.innerHTML;
                 constructOverlay();
             } else {
-                console.warn('novicell.overlay: element does not exist. Please provide a valid selector for use in document.querySelector.');
+                console.warn('novicell.overlay: element does not exist. Please provide a valid element for use.');
                 return;
             }
         }

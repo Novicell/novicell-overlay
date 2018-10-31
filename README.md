@@ -51,7 +51,7 @@ Then call the `novicell.overlay.set()`-method when you need to open the overlay.
 **Example:**
 ```javascript
 // Waiting for the DOM to load
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
 
     // Select your overlay trigger
     var trigger = document.querySelector('#js-overlay-trigger');
@@ -62,9 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
     novicell.overlay.create({
             'selector': trigger.getAttribute('data-element'),
             'class': 'selector-overlay',
-            "onCreate": function() { console.log('created'); },
-            "onLoaded": function() { console.log('loaded'); },
-            "onDestroy": function() { console.log('Destroyed'); }
+            'onCreate': function() { console.log('created'); },
+            'onLoaded': function() { console.log('loaded'); },
+            'onDestroy': function() { console.log('Destroyed'); }
         });
     });
 
@@ -92,14 +92,15 @@ document.addEventListener("DOMContentLoaded", function () {
 ## Options
 ```javascript
 novicell.overlay.create({
-    'videoId': "9bZkp7q19f0",           // [string] Youtube or Vimeo video id
-    'type': "youtube",                  // [string] "youtube" or "vimeo"
-    'class': "video-overlay",           // [string] class for overlay
-    'autoplay': 1,                      // [number] 0 or 1, turns on/off autoplay for vimeo and youtube
-    'selector': "#js-overlay-content",  // [string] javascript selector for content to go in overlay (overrides video)
-    "onCreate": function(){},           // [function] runs on create
-    "onLoaded": function(){},           // [function] runs on load
-    "onDestroy": function(){}           // [function] runs on destroy
+    'videoId': '9bZkp7q19f0',                               // [string] Youtube or Vimeo video id
+    'type': 'youtube',                                      // [string] 'youtube' or 'vimeo'
+    'class': 'video-overlay',                               // [string] class for overlay
+    'autoplay': 1,                                          // [number] 0 or 1, turns on/off autoplay for vimeo and youtube
+    'selector': '#js-overlay-content',                      // [string] javascript selector for content to go in overlay (overrides video)
+    'element': element.querySelector('.child-element'),     // [DOM element] DOM element for content to go in overlay (overrides video)
+    'onCreate': function(){},                               // [function] runs on create
+    'onLoaded': function(){},                               // [function] runs on load
+    'onDestroy': function(){}                               // [function] runs on destroy
 });
 
 ```

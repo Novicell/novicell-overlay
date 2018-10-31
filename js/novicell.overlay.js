@@ -35,7 +35,7 @@ novicell.overlay = novicell.overlay || new function () {
         // Remove existing overlays
         self.destroy();
 
-        // Check if content comes from a HTML element
+        // Check if content comes from a DOM selector
         if (options.hasOwnProperty('selector') && options.selector !== null) {
             var element = document.querySelector(options.selector);
             
@@ -47,7 +47,8 @@ novicell.overlay = novicell.overlay || new function () {
                 return;
             }
         }
-       
+
+        // Check if content comes from a HTML element
         else if (options.hasOwnProperty('element') && options.element !== null) {
             var element = options.element;
 
@@ -55,11 +56,11 @@ novicell.overlay = novicell.overlay || new function () {
                 content = element.innerHTML;
                 constructOverlay();
             } else {
-                console.warn('novicell.overlay: element does not exist. Please provide a valid element for use.');
+                console.warn('novicell.overlay: element does not exist. Please provide a valid DOM element.');
                 return;
             }
         }
-        
+
         // Or if content comes from an ID
         else if (options.hasOwnProperty('videoId')) {
             if (options.videoId !== null) {

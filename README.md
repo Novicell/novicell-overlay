@@ -14,9 +14,13 @@ npm install novicell-overlay --save
 ## Setup
 
 First include the dependency in your project's js file:
-
 ```javascript
 import { overlay } from 'novicell-overlay';
+```
+
+And css
+```css
+@import '../../node_modules/novicell-overlay/css/novicell.overlay.css';
 ```
 
 ## Example

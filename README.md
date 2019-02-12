@@ -13,26 +13,17 @@ npm install novicell-overlay --save
 
 ## Setup
 
-First include the js file in your js bundle or in your HTML:
+First include the dependency in your project's js file:
 
 **JS bundle**
 ```javascript
-scripts: [
-    vendorPath + "novicell-overlay/js/novicell.overlay.js"
-    ...
-]
-```
-
-**HTML**
-```html
-    <script src="/node_modules/novicell-overlay/js/novicell.overlay.js"></script>
+import { overlay } from 'novicell-overlay';
 ```
 
 ## Example
 
-
-
 **Markup**
+
 ```html
 <button id="js-overlay-trigger" class="button button--orange" data-element="#js-overlay-content" type="button">Selector overlay</button>
 <button data-video-id="152477009" data-type="vimeo" class="js-video-overlay-trigger button button--blue">Vimeo overlay</button>
@@ -46,20 +37,23 @@ scripts: [
 </div>
 ```
 
+Then call the `overlay.create()`-method when you need to open the overlay.
 
-Then call the `novicell.overlay.set()`-method when you need to open the overlay.
 **Example:**
 ```javascript
+
+import { overlay } from 'novicell-overlay';
+
 // Waiting for the DOM to load
 document.addEventListener('DOMContentLoaded', function () {
 
     // Select your overlay trigger
-    var trigger = document.querySelector('#js-overlay-trigger');
+    const trigger = document.querySelector('#js-overlay-trigger');
     
     trigger.addEventListener('click', function(e){
     e.preventDefault();
 
-    novicell.overlay.create({
+    overlay.create({
             'selector': trigger.getAttribute('data-element'),
             'class': 'selector-overlay',
             'onCreate': function() { console.log('created'); },
@@ -69,15 +63,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Video overlay
-    var videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
+    const videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
 
-    for (var i = 0; i < videoOverlayTriggers.length; i++) {
+    for (let i = 0; i < videoOverlayTriggers.length; i++) {
         videoOverlayTriggers[i].addEventListener('click', function(e){
             e.preventDefault();
 
-            var currentTrigger = e.target;
+            let currentTrigger = e.target;
 
-            novicell.overlay.create({
+            overlay.create({
             'videoId': currentTrigger.getAttribute('data-video-id'),
             'type': currentTrigger.getAttribute('data-type'),
             'class': 'video-overlay',
@@ -91,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 ## Options
 ```javascript
-novicell.overlay.create({
+overlay.create({
     'videoId': '9bZkp7q19f0',                               // [string] Youtube or Vimeo video id
     'type': 'youtube',                                      // [string] 'youtube' or 'vimeo'
     'class': 'video-overlay',                               // [string] class for overlay
@@ -105,45 +99,10 @@ novicell.overlay.create({
 
 ```
 
-## Extension
+## Contribution
 
-When extending the script, make sure to make a singleton for the `novicell` and the `novicell.overlay` objects before adding your own methods.
+Looking to contribute something? Here's how you can help. Please take a moment to review our contribution guidelines in order to make the contribution process easy and effective for everyone involved.
 
-```javascript
-'use strict';
+## License
 
-var novicell = novicell || {};
-novicell.overlay = novicell.overlay || {};
-novicell.overlay.extentions = novicell.overlay.extentions || new function () {
-    this.test = function() {
-        console.log('test');
-    };
-}();
-```
-Next you need to include your js-files in your js bundle or in your HTML, and then call the `init`-method from your `master.js`.
-Make sure to load you:
-
-**JS bundle**
-```javascript
-scripts: [
-    vendorPath + "novicell-overlay/js/novicell.overlay.js"
-    projectPath + "/components/novicell.overlay.extentions.js"
-    ...
-]
-```
-
-**HTML**
-```html
-    <script src="/node_modules/novicell-overlay/js/novicell.overlay.js"></script>
-    <script src="/scripts/components/novicell.overlay.extentions.js"></script>
-```
-
-Then call the `test`-method from your `master.js`:
-```javascript
-
-document.addEventListener("DOMContentLoaded", function() {
-    novicell.overlay.init();
-    novicell.overlay.extentions.test();
-    ...
-});
-```
+The Novicell Frontend is licensed under the MIT license. (http://opensource.org/licenses/MIT)

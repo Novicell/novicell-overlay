@@ -15,7 +15,6 @@ npm install novicell-overlay --save
 
 First include the dependency in your project's js file:
 
-**JS bundle**
 ```javascript
 import { overlay } from 'novicell-overlay';
 ```
@@ -31,9 +30,9 @@ import { overlay } from 'novicell-overlay';
 
 <div class="overlay-content" id="js-overlay-content" style="display: none;">
     <h1>Seamlessly myocardinate</h1>
-    <p>Rem distinctio, vero sint quas numquam optio placeat, tenetur quasi unde nobis maiores. Reiciendis veritatis itaque recusandae ipsa, qui error possimus illo nihil animi commodi neque beatae, dicta impedit. Laudantium.</p>
-    <p>Officia quam commodi blanditiis unde perferendis repellat deleniti voluptatem consequatur repudiandae eos quibusdam dolorem molestias nostrum numquam maiores totam architecto, nemo provident reprehenderit labore veniam eius molestiae odit enim iusto.</p>
-    <p>Amet dolores reiciendis modi est atque, inventore at adipisci accusamus hic necessitatibus obcaecati recusandae consequuntur, odit, cupiditate ad voluptas laboriosam. Blanditiis ducimus consectetur nulla voluptates rerum iusto quo asperiores enim!</p>
+    <p>Rem distinctio, vero sint quas numquam optio placeat, tenetur quasi unde nobis maiores.</p>
+    <p>Officia quam commodi blanditiis unde perferendis repellat deleniti voluptatem consequatur</p>
+    <p>Amet dolores reiciendis modi est atque, inventore at adipisci accusamus hic necessitatibus</p>
 </div>
 ```
 
@@ -101,7 +100,7 @@ overlay.create({
 
 ## Contribution
 
-Looking to contribute something? Here's how you can help. Please take a moment to review our contribution guidelines in order to make the contribution process easy and effective for everyone involved.
+Looking to contribute something? Here's how you can help. Please take a moment to review our [contribution guidelines](https://github.com/Novicell/novicell-frontend/wiki/Contribution-guidelines) in order to make the contribution process easy and effective for everyone involved.
 
 ## License
 

@@ -1,8 +1,8 @@
 {
   "name": "novicell-overlay",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Simple script that can open an overlay / modal",
-  "main": "dist/app.bundle.js",
+  "main": "js/novicell.overlay.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

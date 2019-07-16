@@ -20,7 +20,7 @@ export default class NovicellOverlay {
         backdrop = "",
         content = "",
     }) {
-        this.self = this.self;
+        this.self = this;
         this.className = className;
         this.options = {};
         this.selector = selector,
@@ -42,7 +42,7 @@ export default class NovicellOverlay {
             }
 
             // Remove existing overlays
-            destroy();
+            this.destroy();
 
             // Check if content comes from a DOM selector
             if (
@@ -124,14 +124,15 @@ export default class NovicellOverlay {
                 return;
             }
         };
-        let destroy = function () {
+        this.destroy = function () {
+            console.log("called");
             if (document.querySelector('#js-novi-overlay')) {
                 // Remove elements
                 this.overlayElem.parentElement.removeChild(this.overlayElem);
                 this.backdrop.parentElement.removeChild(this.backdrop);
 
                 // Stop listening for close overlay events
-                document.removeEventListener('keyup', destroy());
+                document.removeEventListener('keyup', this.destroy());
 
                 // Remove class on body
                 document.documentElement.classList.remove(
@@ -182,7 +183,7 @@ export default class NovicellOverlay {
                     e.target.classList.contains('novi-overlay') ||
                     e.target.classList.contains('novi-overlay__container')
                 ) {
-                    destroy();
+                    this.destroy();
                 }
             });
 
@@ -238,14 +239,14 @@ export default class NovicellOverlay {
             btnClose.id = 'js-novi-overlay-close';
 
             // Add eventlistener for button click
-            btnClose.addEventListener('click', destroy());
+            // btnClose.addEventListener('click', this.destroy());
 
             // Add eventlistener for esc key
-            document.addEventListener('keydown', function (e) {
-                if (e.keyCode === 27) {
-                    destroy();
-                }
-            });
+            // document.addEventListener('keydown', function (e) {
+            //     if (e.keyCode === 27) {
+            //         this.destroy();
+            //     }
+            // });
 
             // Add close button to overlay element
             this.overlayContent.appendChild(btnClose);

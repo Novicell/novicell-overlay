@@ -25,8 +25,10 @@
     <p>Amet dolores reiciendis modi est atque, inventore at adipisci accusamus hic necessitatibus obcaecati recusandae consequuntur, odit, cupiditate ad voluptas laboriosam. Blanditiis ducimus consectetur nulla voluptates rerum iusto quo asperiores enim!</p>
   </div>
 
-  <script src="../js/novicell.overlay.js"></script>
-
+<script src="../dist/demo.umd.js"></script>
+  <!-- <script type="module">
+    import NovicellOverlay from '../dist/novicell-overlay.esm.js';
+  </script>
   <script type="text/javascript">
     // Waiting for the DOM to load
     document.addEventListener("DOMContentLoaded", function () {
@@ -37,13 +39,22 @@
       trigger.addEventListener('click', function(e){
         e.preventDefault();
 
-        novicell.overlay.create({
+        let overlayOne = new NovicellOverlay({
           'selector': trigger.getAttribute('data-element'),
           'class': 'selector-overlay',
           "onCreate": function() { console.log('created'); },
           "onLoaded": function() { console.log('loaded'); },
           "onDestroy": function() { console.log('Destroyed'); }
-        });
+        })
+
+        // novicell.overlay.create({
+        //   'selector': trigger.getAttribute('data-element'),
+        //   'class': 'selector-overlay',
+        //   "onCreate": function() { console.log('created'); },
+        //   "onLoaded": function() { console.log('loaded'); },
+        //   "onDestroy": function() { console.log('Destroyed'); }
+        // });
+
       });
 
       // Video overlay
@@ -67,6 +78,6 @@
       }
 
     });
-  </script>
+  </script> -->
 </body>
 </html>

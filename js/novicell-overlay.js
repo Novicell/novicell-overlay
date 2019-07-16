@@ -3,47 +3,57 @@
  * @name Novicell overlay
  * @desc Simple script that opens an overlay / modal with some content form either a selector or an URL
  * @author Danni Larsen (DLA), Michael Sølvsteen (MSL), Signe Helbo Poulsen (SHP), Emil Skytte Ankersen (EAN)
- * @example novicell.overlay.create({ 'selector': SELECTOR, 'url': URL,  'class':'CLASSNAME', 'onCreate': FUNCTIONNAME, 'onLoaded': FUNCTIONNAME, 'onDestroy': FUNCTIONNAME });
+ * @example novicell.overlay.create({ 'selector': SELECTOR, 'url': URL,  'class':'CLASSNAME', 'onCreate': FUNCTIONNAME, 'this.onLoaded': FUNCTIONNAME, 'this.onDestroy': FUNCTIONNAME });
  * @requires none
  */
 
-const NovicellOverlay = {
-    overlay: function() {
-        let self = this;
-        let options = {};
-        let overlayElem;
-        let overlayContainer;
-        let overlayContent;
-        let backdrop;
-        let content;
-        let onCreate;
-        let onLoaded;
-        let onDestroy;
-        let isVideo = false;
-
-        this.create = function(opts) {
-            let self = this;
-            // Set global options
-            const opts = opts;
-
+export default class NovicellOverlay {
+    constructor({
+        selector,
+        className,
+        onCreate,
+        onLoaded,
+        onDestroy,
+        overlayElem = "",
+        overlayContainer = "",
+        overlayContent = "",
+        backdrop = "",
+        content = "",
+    }) {
+        this.self = this.self;
+        this.className = className;
+        this.options = {};
+        this.selector = selector,
+        this.overlayElem = overlayElem;
+        this.overlayContainer = overlayContainer;
+        this.overlayContent = overlayContent;
+        this.backdrop = backdrop;
+        this.content = content;
+        this.onCreate = onCreate;
+        this.onLoaded = onLoaded;
+        this.onDestroy = onDestroy;
+        this.isVideo = false;
+        
+        this.create = function () {
+            
             //call onCreate callback
-            if (typeof options.onCreate === 'function') {
-                options.onCreate();
+            if (typeof this.onCreate === 'function') {
+                this.onCreate();
             }
 
             // Remove existing overlays
-            self.destroy();
+            destroy();
 
             // Check if content comes from a DOM selector
             if (
-                options.hasOwnProperty('selector') &&
-                options.selector !== null
+                this.hasOwnProperty('selector') &&
+                selector !== null
             ) {
-                let element = document.querySelector(options.selector);
+                let element = document.querySelector(selector);
 
                 if (element) {
                     content = element.innerHTML;
-                    constructOverlay();
+                    this.constructOverlay();
                 } else {
                     console.warn(
                         'novicell.overlay: element does not exist. Please provide a valid selector for use in document.querySelector.'
@@ -53,14 +63,14 @@ const NovicellOverlay = {
             }
             // Check if content comes from a HTML element
             else if (
-                options.hasOwnProperty('element') &&
-                options.element !== null
+                this.hasOwnProperty('element') &&
+                element !== null
             ) {
-                let element = options.element;
+                let element = element;
 
                 if (element) {
                     content = element.innerHTML;
-                    constructOverlay();
+                    this.constructOverlay();
                 } else {
                     console.warn(
                         'novicell.overlay: element does not exist. Please provide a valid DOM element.'
@@ -69,23 +79,23 @@ const NovicellOverlay = {
                 }
             }
             // Or if content comes from an ID
-            else if (options.hasOwnProperty('videoId')) {
-                if (options.videoId !== null) {
+            else if (this.hasOwnProperty('videoId')) {
+                if (videoId !== null) {
                     let src = '';
                     isVideo = true;
 
-                    if (options.type == 'vimeo') {
+                    if (type == 'vimeo') {
                         src =
                             'https://player.vimeo.com/video/' +
-                            options.videoId +
+                            videoId +
                             '?autoplay=' +
-                            options.autoplay;
-                    } else if (options.type == 'youtube') {
+                            autoplay;
+                    } else if (type == 'youtube') {
                         src =
                             'https://www.youtube.com/embed/' +
-                            options.videoId +
+                            videoId +
                             '?autoplay=' +
-                            options.autoplay +
+                            autoplay +
                             '&rel=0';
                     } else {
                         return;
@@ -114,15 +124,14 @@ const NovicellOverlay = {
                 return;
             }
         };
-
-        this.destroy = function() {
+        let destroy = function () {
             if (document.querySelector('#js-novi-overlay')) {
                 // Remove elements
-                overlayElem.parentElement.removeChild(overlayElem);
-                backdrop.parentElement.removeChild(backdrop);
+                this.overlayElem.parentElement.removeChild(this.overlayElem);
+                this.backdrop.parentElement.removeChild(this.backdrop);
 
                 // Stop listening for close overlay events
-                document.removeEventListener('keyup', self.destroy);
+                document.removeEventListener('keyup', destroy());
 
                 // Remove class on body
                 document.documentElement.classList.remove(
@@ -131,95 +140,97 @@ const NovicellOverlay = {
                 );
 
                 // Reset video letiable
-                isVideo = false;
+                this.isVideo = false;
 
-                // Call onDestroy callback
-                if (typeof options.onDestroy === 'function') {
-                    options.onDestroy();
+                // Call this.onDestroy callback
+                if (typeof this.onDestroy === 'function') {
+                    this.onDestroy();
                 }
             }
         };
-        function constructOverlay() {
+
+        this.constructOverlay = function() {
             // Create backdrop
-            setupBackdrop();
+            this.setupBackdrop();
 
             // Create the overlay
-            setupOverlay();
+            this.setupOverlay();
 
             // Create content for overlay
-            setupOverlayContainer();
+            this.setupOverlayContainer();
 
             // Create close button
-            setupCloseButton();
+            this.setupCloseButton();
 
             // Add class to body-element
             document.documentElement.classList.add('no-scroll');
 
-            // Call onLoaded callback
-            if (typeof options.onLoaded === 'function') {
-                options.onLoaded();
+            // Call this.onLoaded callback
+            if (typeof this.onLoaded === 'function') {
+                this.onLoaded();
             }
         }
-        function setupBackdrop() {
-            // Create the backdrop
-            backdrop = document.createElement('div');
-            backdrop.classList.add('novi-backdrop');
-            backdrop.id = 'js-novi-backdrop';
 
-            backdrop.addEventListener('click', function(e) {
+        this.setupBackdrop = function () {
+            // Create the backdrop
+            this.backdrop = document.createElement('div');
+            this.backdrop.classList.add('novi-backdrop');
+            this.backdrop.id = 'js-novi-backdrop';
+
+            this.backdrop.addEventListener('click', function (e) {
                 if (
                     e.target.classList.contains('novi-overlay') ||
                     e.target.classList.contains('novi-overlay__container')
                 ) {
-                    self.destroy();
+                    destroy();
                 }
             });
 
             // Add backdrop to overlay element
-            document.querySelector('body').appendChild(backdrop);
+            document.querySelector('body').appendChild(this.backdrop);
         }
 
         /*
          * Helper functions for HTML elements
          */
-        function setupOverlay() {
+        this.setupOverlay = function() {
             // Create the overlay
-            overlayElem = document.createElement('div');
-            overlayElem.classList.add('novi-overlay');
-            overlayElem.id = 'js-novi-overlay';
+            this.overlayElem = document.createElement('div');
+            this.overlayElem.classList.add('novi-overlay');
+            this.overlayElem.id = 'js-novi-overlay';
 
             // Set class for the overlay, if set in options
-            if (options.hasOwnProperty('class')) {
-                overlayElem.classList.add(options.class);
+            if (this.hasOwnProperty('className')) {
+                this.overlayElem.classList.add(this.className);
             }
 
             // Add overlay to overlay element
             // document.querySelector('body').appendChild(overlayElem);
-            backdrop.appendChild(overlayElem);
+            this.backdrop.appendChild(this.overlayElem);
         }
 
-        function setupOverlayContainer() {
+        this.setupOverlayContainer = function() {
             // Create content for overlay
-            overlayContainer = document.createElement('div');
-            overlayContainer.classList.add('novi-overlay__container');
+            this.overlayContainer = document.createElement('div');
+            this.overlayContainer.classList.add('novi-overlay__container');
 
             // Create scroll element
-            overlayContent = document.createElement('div');
-            overlayContent.classList.add('novi-overlay__content');
+            this.overlayContent = document.createElement('div');
+            this.overlayContent.classList.add('novi-overlay__content');
 
-            if (isVideo) {
-                overlayContent.classList.add('novi-overlay__content--video');
+            if (this.isVideo) {
+                this.overlayContent.classList.add('novi-overlay__content--video');
             }
 
             // Set content
-            overlayContent.innerHTML = content;
-            overlayContainer.appendChild(overlayContent);
+            this.overlayContent.innerHTML = content;
+            this.overlayContainer.appendChild(this.overlayContent);
 
             // Add overlayContainer to overlay element
-            overlayElem.appendChild(overlayContainer);
+            this.overlayElem.appendChild(this.overlayContainer);
         }
 
-        function setupCloseButton() {
+        this.setupCloseButton = function() {
             // Create the button
             let btnClose = document.createElement('button');
             btnClose.classList.add('novi-overlay-close', 'button--close');
@@ -227,30 +238,30 @@ const NovicellOverlay = {
             btnClose.id = 'js-novi-overlay-close';
 
             // Add eventlistener for button click
-            btnClose.addEventListener('click', self.destroy);
+            btnClose.addEventListener('click', destroy());
 
             // Add eventlistener for esc key
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 if (e.keyCode === 27) {
-                    self.destroy();
+                    destroy();
                 }
             });
 
             // Add close button to overlay element
-            overlayContent.appendChild(btnClose);
+            this.overlayContent.appendChild(btnClose);
         }
 
         /*
          * Helper functions for getting content
          */
-        function get(url) {
+        this.get = function(url) {
             // Return a new promise.
-            return new Promise(function(resolve, reject) {
+            return new Promise(function (resolve, reject) {
                 // Do the usual XHR stuff
                 let req = new XMLHttpRequest();
                 req.open('GET', url);
 
-                req.onload = function() {
+                req.onload = function () {
                     if (req.status >= 200 && req.status < 400) {
                         // Success!!
                         resolve(req.response);
@@ -261,7 +272,7 @@ const NovicellOverlay = {
                 };
 
                 // Handle network errors
-                req.onerror = function() {
+                req.onerror = function () {
                     reject(Error('Network Error'));
                 };
 
@@ -271,5 +282,3 @@ const NovicellOverlay = {
         }
     }
 }
-
-export default NovicellOverlay;

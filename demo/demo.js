@@ -1,12 +1,9 @@
 import NovicellOverlay from '../dist/novicell-overlay.esm.js';
 document.addEventListener("DOMContentLoaded", function () {
-
     // Select your overlay trigger
-    var trigger = document.querySelector('#js-overlay-trigger');
-
+    let trigger = document.querySelector('#js-overlay-trigger');
     trigger.addEventListener('click', function (e) {
         e.preventDefault();
-
         let overlayOne = new NovicellOverlay({
             selector: trigger.getAttribute('data-element'),
             className: 'selector-overlay',
@@ -22,16 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         overlayOne.create();
     });
-
     // Video overlay
-    var videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
-
-    for (var i = 0; i < videoOverlayTriggers.length; i++) {
-        videoOverlayTriggers[i].addEventListener('click', function (e) {
+    let videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
+    for (let i = 0; i < videoOverlayTriggers.length; i++) {
+        videoOverlayTriggers[i].addEventListener('click', (e)=>{
             e.preventDefault();
-
-            var currentTrigger = e.target;
-
+            let currentTrigger = e.target;
             let overlayVideo = new NovicellOverlay({
                 // element: currentTrigger,
                 videoId: currentTrigger.getAttribute("data-video-id"),
@@ -40,10 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 className: "video-overlay",
                 isVideo: true
             })
-
             overlayVideo.create();
-
         });
     }
-
 });

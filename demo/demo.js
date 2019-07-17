@@ -21,15 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         })
         overlayOne.create();
-
-        // novicell.overlay.create({
-        //   'selector': trigger.getAttribute('data-element'),
-        //   'class': 'selector-overlay',
-        //   "onCreate": function() { console.log('created'); },
-        //   "onLoaded": function() { console.log('loaded'); },
-        //   "onDestroy": function() { console.log('Destroyed'); }
-        // });
-
     });
 
     // Video overlay
@@ -41,13 +32,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             var currentTrigger = e.target;
 
-            novicell.overlay.create({
-                'videoId': currentTrigger.getAttribute('data-video-id'),
-                'type': currentTrigger.getAttribute('data-type'),
-                'autoplay': 1,
-                'class': 'video-overlay'
-            });
-
+            let overlayVideo = new NovicellOverlay({
+                // element: currentTrigger,
+                videoId: currentTrigger.getAttribute("data-video-id"),
+                type: currentTrigger.getAttribute('data-type'),
+                autoplay: 1,
+                className: "video-overlay",
+                isVideo: true
+            })
+            
+            // novicell.overlay.create({
+            //     'videoId': currentTrigger.getAttribute('data-video-id'),
+            //     'type': currentTrigger.getAttribute('data-type'),
+            //     'autoplay': 1,
+            //     'class': 'video-overlay'
+            // });
+            
+            overlayVideo.create();
 
         });
     }

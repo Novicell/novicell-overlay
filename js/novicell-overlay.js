@@ -9,7 +9,7 @@
 
 export default class NovicellOverlay {
     constructor({
-        selector,
+        selector = null,
         className,
         onCreate,
         onLoaded,
@@ -18,12 +18,17 @@ export default class NovicellOverlay {
         overlayContainer = "",
         overlayContent = "",
         backdrop = "",
-        content = "",
+        content = null,
+        isVideo = false,
+        type = "",
+        videoId = null,
+        element = null,
+        autoplay = null
     }) {
         this.self = this;
         this.className = className;
         this.options = {};
-        this.selector = selector,
+        this.selector = selector;
         this.overlayElem = overlayElem;
         this.overlayContainer = overlayContainer;
         this.overlayContent = overlayContent;
@@ -32,27 +37,30 @@ export default class NovicellOverlay {
         this.onCreate = onCreate;
         this.onLoaded = onLoaded;
         this.onDestroy = onDestroy;
-        this.isVideo = false;
+        this.isVideo = isVideo;
+        this.type = type;
+        this.videoId = videoId;
+        this.element = element;
+        this.content = content;
+        this.autoplay = autoplay;
         
         this.create = function () {
-            
             //call onCreate callback
             if (typeof this.onCreate === 'function') {
                 this.onCreate();
             }
-
             // Remove existing overlays
             this.destroy();
 
             // Check if content comes from a DOM selector
             if (
                 this.hasOwnProperty('selector') &&
-                selector !== null
+                this.selector !== null
             ) {
-                let element = document.querySelector(selector);
+                let element = document.querySelector(this.selector);
 
                 if (element) {
-                    content = element.innerHTML;
+                    this.content = element.innerHTML;
                     this.constructOverlay();
                 } else {
                     console.warn(
@@ -64,12 +72,12 @@ export default class NovicellOverlay {
             // Check if content comes from a HTML element
             else if (
                 this.hasOwnProperty('element') &&
-                element !== null
+                this.element !== null
             ) {
-                let element = element;
+                // let element = this.element;
 
-                if (element) {
-                    content = element.innerHTML;
+                if (this.element) {
+                    content = this.element.innerHTML;
 
                     this.constructOverlay();
                 } else {
@@ -81,22 +89,22 @@ export default class NovicellOverlay {
             }
             // Or if content comes from an ID
             else if (this.hasOwnProperty('videoId')) {
-                if (videoId !== null) {
+                if (this.videoId !== null) {
                     let src = '';
-                    isVideo = true;
+                    this.isVideo = true;
 
-                    if (type == 'vimeo') {
+                    if (this.type == 'vimeo') {
                         src =
                             'https://player.vimeo.com/video/' +
-                            videoId +
+                            this.videoId +
                             '?autoplay=' +
-                            autoplay;
-                    } else if (type == 'youtube') {
+                            this.autoplay;
+                    } else if (this.type == 'youtube') {
                         src =
                             'https://www.youtube.com/embed/' +
-                            videoId +
+                            this.videoId +
                             '?autoplay=' +
-                            autoplay +
+                            this.autoplay +
                             '&rel=0';
                     } else {
                         return;
@@ -109,9 +117,8 @@ export default class NovicellOverlay {
                     iframe.setAttribute('width', '100%');
                     iframe.setAttribute('height', '100%');
 
-                    content = iframe.outerHTML;
-
-                    constructOverlay();
+                    this.content = iframe.outerHTML;
+                    this.constructOverlay();
                 } else {
                     console.warn(
                         'novicell.overlay: video-id is empty. Please provide a video-id for use in video embed code (we support only Vimeo and YouTube).'
@@ -226,7 +233,7 @@ export default class NovicellOverlay {
             }
 
             // Set content
-            this.overlayContent.innerHTML = content;
+            this.overlayContent.innerHTML = this.content;
             this.overlayContainer.appendChild(this.overlayContent);
 
             // Add overlayContainer to overlay element

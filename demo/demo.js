@@ -40,14 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 className: "video-overlay",
                 isVideo: true
             })
-            
-            // novicell.overlay.create({
-            //     'videoId': currentTrigger.getAttribute('data-video-id'),
-            //     'type': currentTrigger.getAttribute('data-type'),
-            //     'autoplay': 1,
-            //     'class': 'video-overlay'
-            // });
-            
+
             overlayVideo.create();
 
         });

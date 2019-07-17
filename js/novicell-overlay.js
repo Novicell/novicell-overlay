@@ -2,7 +2,7 @@
 /**
  * @name Novicell overlay
  * @desc Simple script that opens an overlay / modal with some content form either a selector or an URL
- * @author Danni Larsen (DLA), Michael Sølvsteen (MSL), Signe Helbo Poulsen (SHP), Emil Skytte Ankersen (EAN)
+ * @author Danni Larsen (DLA), Michael Sølvsteen (MSL), Signe Helbo Poulsen (SHP), Emil Skytte Ankersen (EAN), Henrik Schütze (HSC)
  * @example novicell.overlay.create({ 'selector': SELECTOR, 'url': URL,  'class':'CLASSNAME', 'onCreate': FUNCTIONNAME, 'this.onLoaded': FUNCTIONNAME, 'this.onDestroy': FUNCTIONNAME });
  * @requires none
  */
@@ -25,9 +25,7 @@ export default class NovicellOverlay {
         element = null,
         autoplay = null
     }) {
-        this.self = this;
         this.className = className;
-        this.options = {};
         this.selector = selector;
         this.overlayElem = overlayElem;
         this.overlayContainer = overlayContainer;
@@ -43,7 +41,7 @@ export default class NovicellOverlay {
         this.element = element;
         this.content = content;
         this.autoplay = autoplay;
-        
+
         this.create = function () {
             //call onCreate callback
             if (typeof this.onCreate === 'function') {
@@ -92,31 +90,20 @@ export default class NovicellOverlay {
                 if (this.videoId !== null) {
                     let src = '';
                     this.isVideo = true;
-
                     if (this.type == 'vimeo') {
-                        src =
-                            'https://player.vimeo.com/video/' +
-                            this.videoId +
-                            '?autoplay=' +
-                            this.autoplay;
+                        src = `https://player.vimeo.com/video/${this.videoId}?autoplay=${this.autoplay}&loop=1&muted=1`;
                     } else if (this.type == 'youtube') {
-                        src =
-                            'https://www.youtube.com/embed/' +
-                            this.videoId +
-                            '?autoplay=' +
-                            this.autoplay +
-                            '&rel=0';
+                        src = `https://www.youtube.com/embed/${this.videoId}?autoplay=${this.autoplay}&rel=0`;
                     } else {
                         return;
                     }
-
                     let iframe = document.createElement('iframe');
                     iframe.setAttribute('src', src);
                     iframe.setAttribute('frameborder', 0);
+                    iframe.setAttribute('allow', 'autoplay');
                     iframe.setAttribute('allowfullscreen', '');
                     iframe.setAttribute('width', '100%');
                     iframe.setAttribute('height', '100%');
-
                     this.content = iframe.outerHTML;
                     this.constructOverlay();
                 } else {
@@ -139,7 +126,7 @@ export default class NovicellOverlay {
                 this.backdrop.parentElement.removeChild(this.backdrop);
 
                 // Stop listening for close overlay events
-                document.removeEventListener('keyup', (e)=>{
+                document.removeEventListener('keyup', (e) => {
                     this.destroy();
                 });
 
@@ -159,7 +146,7 @@ export default class NovicellOverlay {
             }
         };
 
-        this.constructOverlay = function() {
+        this.constructOverlay = function () {
             // Create backdrop
             this.setupBackdrop();
 
@@ -187,7 +174,7 @@ export default class NovicellOverlay {
             this.backdrop.classList.add('novi-backdrop');
             this.backdrop.id = 'js-novi-backdrop';
 
-            this.backdrop.addEventListener('click', (e)=>{
+            this.backdrop.addEventListener('click', (e) => {
                 if (
                     e.target.classList.contains('novi-overlay') ||
                     e.target.classList.contains('novi-overlay__container')
@@ -203,7 +190,7 @@ export default class NovicellOverlay {
         /*
          * Helper functions for HTML elements
          */
-        this.setupOverlay = function() {
+        this.setupOverlay = function () {
             // Create the overlay
             this.overlayElem = document.createElement('div');
             this.overlayElem.classList.add('novi-overlay');
@@ -219,7 +206,7 @@ export default class NovicellOverlay {
             this.backdrop.appendChild(this.overlayElem);
         }
 
-        this.setupOverlayContainer = function() {
+        this.setupOverlayContainer = function () {
             // Create content for overlay
             this.overlayContainer = document.createElement('div');
             this.overlayContainer.classList.add('novi-overlay__container');
@@ -240,7 +227,7 @@ export default class NovicellOverlay {
             this.overlayElem.appendChild(this.overlayContainer);
         }
 
-        this.setupCloseButton = function() {
+        this.setupCloseButton = function () {
             // Create the button
             let btnClose = document.createElement('button');
             btnClose.classList.add('novi-overlay-close', 'button--close');
@@ -248,12 +235,12 @@ export default class NovicellOverlay {
             btnClose.id = 'js-novi-overlay-close';
 
             // Add eventlistener for button click
-            btnClose.addEventListener('click', (e)=>{
+            btnClose.addEventListener('click', (e) => {
                 this.destroy();
             });
 
             // Add eventlistener for esc key
-            document.addEventListener('keydown', (e)=>{
+            document.addEventListener('keydown', (e) => {
                 if (e.keyCode === 27) {
                     this.destroy();
                 }
@@ -266,7 +253,7 @@ export default class NovicellOverlay {
         /*
          * Helper functions for getting content
          */
-        this.get = function(url) {
+        this.get = function (url) {
             // Return a new promise.
             return new Promise(function (resolve, reject) {
                 // Do the usual XHR stuff

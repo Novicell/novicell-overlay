@@ -63,7 +63,7 @@ Then in your javascript instantiate the overlay objects you want
 import NovicellOverlay from '../dist/novicell-overlay.esm.js';
 document.addEventListener("DOMContentLoaded", function () {
     // Select your overlay trigger
-    var trigger = document.querySelector('#js-overlay-trigger');
+    let trigger = document.querySelector('#js-overlay-trigger');
     trigger.addEventListener('click', function (e) {
         e.preventDefault();
         let overlayOne = new NovicellOverlay({
@@ -82,11 +82,11 @@ document.addEventListener("DOMContentLoaded", function () {
         overlayOne.create();
     });
     // Video overlay
-    var videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
-    for (var i = 0; i < videoOverlayTriggers.length; i++) {
-        videoOverlayTriggers[i].addEventListener('click', function (e) {
+    let videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
+    for (let i = 0; i < videoOverlayTriggers.length; i++) {
+        videoOverlayTriggers[i].addEventListener('click', (e)=>{
             e.preventDefault();
-            var currentTrigger = e.target;
+            let currentTrigger = e.target;
             let overlayVideo = new NovicellOverlay({
                 // element: currentTrigger,
                 videoId: currentTrigger.getAttribute("data-video-id"),
@@ -105,8 +105,9 @@ document.addEventListener("DOMContentLoaded", function () {
 ```javascript
 let overlay = new NovicellOverlay({
     'videoId': '9bZkp7q19f0',                               // [string] Youtube or Vimeo video id
+    'isVideo': true                                         // [boolean] Determines if video. Default is false
     'type': 'youtube',                                      // [string] 'youtube' or 'vimeo'
-    'class': 'video-overlay',                               // [string] class for overlay
+    'className': 'video-overlay',                           // [string] class for overlay
     'autoplay': 1,                                          // [number] 0 or 1, turns on/off autoplay for vimeo and youtube
     'selector': '#js-overlay-content',                      // [string] javascript selector for content to go in overlay (overrides video)
     'element': element.querySelector('.child-element'),     // [DOM element] DOM element for content to go in overlay (overrides video)

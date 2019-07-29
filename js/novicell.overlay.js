@@ -68,7 +68,7 @@ novicell.overlay = novicell.overlay || new function () {
                 isVideo = true;
 
                 if(options.type == 'vimeo') {
-                    src = 'https://player.vimeo.com/video/' + options.videoId + '?autoplay=' + options.autoplay;
+                    src = 'https://player.vimeo.com/video/' + options.videoId + '?autoplay=' + options.autoplay + '&loop=1&muted=1';
                 }
                 else if(options.type == 'youtube') {
                     src = 'https://www.youtube.com/embed/' + options.videoId + '?autoplay=' + options.autoplay + '&rel=0';
@@ -80,6 +80,7 @@ novicell.overlay = novicell.overlay || new function () {
                 var iframe = document.createElement('iframe');
                 iframe.setAttribute('src', src);
                 iframe.setAttribute('frameborder', 0);
+                iframe.setAttribute('allow', 'autoplay');
                 iframe.setAttribute('allowfullscreen', '');
                 iframe.setAttribute('width', '100%');
                 iframe.setAttribute('height', '100%');

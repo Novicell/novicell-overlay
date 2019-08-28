@@ -39,7 +39,6 @@ export default class NovicellOverlay {
         this.type = type;
         this.videoId = videoId;
         this.element = element;
-        this.content = content;
         this.autoplay = autoplay;
 
         this.create = function () {
@@ -75,7 +74,7 @@ export default class NovicellOverlay {
                 // let element = this.element;
 
                 if (this.element) {
-                    content = this.element.innerHTML;
+                    this.content = this.element.innerHTML;
 
                     this.constructOverlay();
                 } else {

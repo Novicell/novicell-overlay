@@ -1,6 +1,6 @@
 {
   "name": "novicell-overlay",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Simple script that can open an overlay / modal",
   "main": "/dist/novicell-overlay.umd.js'",
   "scripts": {

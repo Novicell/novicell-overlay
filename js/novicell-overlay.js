@@ -58,7 +58,7 @@ export default class NovicellOverlay {
           const currElement = document.querySelector(this.selector);
   
           if (currElement) {
-            this.content = element.innerHTML;
+            this.content = currElement.innerHTML;
             this.constructOverlay();
           } else {
             console.warn(

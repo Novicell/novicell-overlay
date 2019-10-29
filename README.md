@@ -54,7 +54,7 @@ Then call the `overlay.create()`-method when you need to open the overlay.
 
 **Example:**
 ```javascript
-import NovicellOverlay from './novicell-overlay';
+import NovicellOverlay from 'novicell-overlay';
 // import NovicellOverlay from 'novicell-overlay.esm.js';//
 document.addEventListener('DOMContentLoaded', () => {
     // Select your overlay trigger

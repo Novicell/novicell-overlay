@@ -1,72 +1,37 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Novicell Overlay</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-
   <link rel="stylesheet" type="text/css" href="../dist/novicell.overlay.min.css">
   <link rel="stylesheet" type="text/css" href="sample-styles.css">
-  
 </head>
+
 <body>
 
   <div class="demo-content">
-    
-    <button id="js-overlay-trigger" class="button button--orange" data-element="#js-overlay-content" type="button">Selector overlay</button>
-    <button data-video-id="152477009" data-type="vimeo" class="js-video-overlay-trigger button button--blue">Vimeo overlay</button>
-    <button data-video-id="5dsGWM5XGdg" data-type="youtube" class="js-video-overlay-trigger button button--red">YouTube overlay</button>
-
+    <button id="js-overlay-trigger" class="button button--orange" data-element="#js-overlay-content"
+      type="button">Selector overlay</button>
+    <button data-video-id="152477009" data-type="vimeo" class="js-video-overlay-trigger button button--blue">Vimeo
+      overlay</button>
+    <button data-video-id="5dsGWM5XGdg" data-type="youtube" class="js-video-overlay-trigger button button--red">YouTube
+      overlay</button>
   </div>
 
   <div class="overlay-content" id="js-overlay-content" style="display: none;">
     <h1>Seamlessly myocardinate</h1>
-    <p>Rem distinctio, vero sint quas numquam optio placeat, tenetur quasi unde nobis maiores. Reiciendis veritatis itaque recusandae ipsa, qui error possimus illo nihil animi commodi neque beatae, dicta impedit. Laudantium.</p>
-    <p>Officia quam commodi blanditiis unde perferendis repellat deleniti voluptatem consequatur repudiandae eos quibusdam dolorem molestias nostrum numquam maiores totam architecto, nemo provident reprehenderit labore veniam eius molestiae odit enim iusto.</p>
-    <p>Amet dolores reiciendis modi est atque, inventore at adipisci accusamus hic necessitatibus obcaecati recusandae consequuntur, odit, cupiditate ad voluptas laboriosam. Blanditiis ducimus consectetur nulla voluptates rerum iusto quo asperiores enim!</p>
+    <p>Rem distinctio, vero sint quas numquam optio placeat, tenetur quasi unde nobis maiores. Reiciendis veritatis
+      itaque recusandae ipsa, qui error possimus illo nihil animi commodi neque beatae, dicta impedit. Laudantium.</p>
+    <p>Officia quam commodi blanditiis unde perferendis repellat deleniti voluptatem consequatur repudiandae eos
+      quibusdam dolorem molestias nostrum numquam maiores totam architecto, nemo provident reprehenderit labore veniam
+      eius molestiae odit enim iusto.</p>
+    <p>Amet dolores reiciendis modi est atque, inventore at adipisci accusamus hic necessitatibus obcaecati recusandae
+      consequuntur, odit, cupiditate ad voluptas laboriosam. Blanditiis ducimus consectetur nulla voluptates rerum iusto
+      quo asperiores enim!</p>
   </div>
 
-  <script src="../js/novicell.overlay.js"></script>
-
-  <script type="text/javascript">
-    // Waiting for the DOM to load
-    document.addEventListener("DOMContentLoaded", function () {
-
-      // Select your overlay trigger
-      var trigger = document.querySelector('#js-overlay-trigger');
-        
-      trigger.addEventListener('click', function(e){
-        e.preventDefault();
-
-        novicell.overlay.create({
-          'selector': trigger.getAttribute('data-element'),
-          'class': 'selector-overlay',
-          "onCreate": function() { console.log('created'); },
-          "onLoaded": function() { console.log('loaded'); },
-          "onDestroy": function() { console.log('Destroyed'); }
-        });
-      });
-
-      // Video overlay
-      var videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
-
-      for (var i = 0; i < videoOverlayTriggers.length; i++) {
-        videoOverlayTriggers[i].addEventListener('click', function(e){
-          e.preventDefault();
-
-          var currentTrigger = e.target;
-
-          novicell.overlay.create({
-            'videoId': currentTrigger.getAttribute('data-video-id'),
-            'type': currentTrigger.getAttribute('data-type'),
-            'autoplay': 1,
-            'class': 'video-overlay'
-          });
-
-
-        });
-      }
-
-    });
-  </script>
+  <script src="../dist/demo.umd.js"></script>
 </body>
+
 </html>

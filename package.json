@@ -1,8 +1,8 @@
 {
   "name": "novicell-overlay",
-  "version": "1.1.2",
+  "version": "2.0.5",
   "description": "Simple script that can open an overlay / modal",
-  "main": "js/novicell.overlay.js",
+  "main": "dist/novicell-overlay.umd.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

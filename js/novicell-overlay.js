@@ -86,37 +86,25 @@ export default class NovicellOverlay {
                 }
             }
             // Or if content comes from an ID
-            else if (this.hasOwnProperty('videoId')) {
-                if (this.videoId !== null) {
-                    let src = '';
-                    this.isVideo = true;
-                    if (this.type == 'vimeo') {
-                        src = `https://player.vimeo.com/video/${this.videoId}?autoplay=${this.autoplay}&loop=1&muted=1`;
-                    } else if (this.type == 'youtube') {
-                        src = `https://www.youtube.com/embed/${this.videoId}?autoplay=${this.autoplay}&rel=0`;
-                    } else {
-                        return;
-                    }
-                    let iframe = document.createElement('iframe');
-                    iframe.setAttribute('src', src);
-                    iframe.setAttribute('frameborder', 0);
-                    iframe.setAttribute('allow', 'autoplay');
-                    iframe.setAttribute('allowfullscreen', '');
-                    iframe.setAttribute('width', '100%');
-                    iframe.setAttribute('height', '100%');
-                    this.content = iframe.outerHTML;
-                    this.constructOverlay();
+            else if (this.videoId) {
+                let src = '';
+                this.isVideo = true;
+                if (this.type == 'vimeo') {
+                    src = `https://player.vimeo.com/video/${this.videoId}?autoplay=${this.autoplay}&loop=1&muted=1`;
+                } else if (this.type == 'youtube') {
+                    src = `https://www.youtube.com/embed/${this.videoId}?autoplay=${this.autoplay}&rel=0`;
                 } else {
-                    console.warn(
-                        'novicell.overlay: video-id is empty. Please provide a video-id for use in video embed code (we support only Vimeo and YouTube).'
-                    );
                     return;
                 }
-            } else {
-                console.error(
-                    'novicell.overlay: no content to display! Please set a selector or a url to load.'
-                );
-                return;
+                let iframe = document.createElement('iframe');
+                iframe.setAttribute('src', src);
+                iframe.setAttribute('frameborder', 0);
+                iframe.setAttribute('allow', 'autoplay');
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.setAttribute('width', '100%');
+                iframe.setAttribute('height', '100%');
+                this.content = iframe.outerHTML;
+                this.constructOverlay();
             }
         };
         this.destroy = function () {

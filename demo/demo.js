@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Video overlay
     let videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
     for (let i = 0; i < videoOverlayTriggers.length; i++) {
-        videoOverlayTriggers[i].addEventListener('click', (e)=>{
+        videoOverlayTriggers[i].addEventListener('click', (e) => {
             e.preventDefault();
             let currentTrigger = e.target;
             let overlayVideo = new NovicellOverlay({

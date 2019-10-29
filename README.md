@@ -8,42 +8,36 @@ Written in pure Vanilla JS, it has *no dependencies*. It ships with a sample POS
 ### Install with npm
 
 ```bash
-npm install novicell-overlay --save
+npm install novicell-overlay
 ```
 
 ## Setup
 
-First include the js file in your js bundle or in your HTML:
-
-**JS bundle**
+First include the dependency in your project's js file:
 ```javascript
-scripts: [
-    vendorPath + "novicell-overlay/dist/novicell-overlay.esm.js"
-    ...
-]
+import NovicellOverlay from 'novicell-overlay';
 ```
 
-**HTML**
-```html
-    <script src="/node_modules/novicell-overlay/dist/novicell-overlay-esm.js"></script>
+And css (optional)
+```css
+@import '../../node_modules/novicell-overlay/css/novicell.overlay.css';
 ```
 
 ## Example
 
-
-
 **Markup**
+
 ```html
-  <div class="demo-content">
+<div class="demo-content">
     <button id="js-overlay-trigger" class="button button--orange" data-element="#js-overlay-content"
       type="button">Selector overlay</button>
     <button data-video-id="152477009" data-type="vimeo" class="js-video-overlay-trigger button button--blue">Vimeo
       overlay</button>
     <button data-video-id="5dsGWM5XGdg" data-type="youtube" class="js-video-overlay-trigger button button--red">YouTube
       overlay</button>
-  </div>
+</div>
 
-  <div class="overlay-content" id="js-overlay-content" style="display: none;">
+<div class="overlay-content" id="js-overlay-content" style="display: none;">
     <h1>Seamlessly myocardinate</h1>
     <p>Rem distinctio, vero sint quas numquam optio placeat, tenetur quasi unde nobis maiores. Reiciendis veritatis
       itaque recusandae ipsa, qui error possimus illo nihil animi commodi neque beatae, dicta impedit. Laudantium.</p>
@@ -53,57 +47,44 @@ scripts: [
     <p>Amet dolores reiciendis modi est atque, inventore at adipisci accusamus hic necessitatibus obcaecati recusandae
       consequuntur, odit, cupiditate ad voluptas laboriosam. Blanditiis ducimus consectetur nulla voluptates rerum iusto
       quo asperiores enim!</p>
-  </div>
+</div>
 ```
 
+Then call the `overlay.create()`-method when you need to open the overlay.
 
-Then in your javascript instantiate the overlay objects you want
 **Example:**
 ```javascript
-import NovicellOverlay from '../dist/novicell-overlay.esm.js';
-document.addEventListener("DOMContentLoaded", function () {
+import NovicellOverlay from './novicell-overlay';
+// import NovicellOverlay from 'novicell-overlay.esm.js';//
+document.addEventListener('DOMContentLoaded', () => {
     // Select your overlay trigger
-    let trigger = document.querySelector('#js-overlay-trigger');
-    trigger.addEventListener('click', function (e) {
+    const trigger = document.querySelector('#js-overlay-trigger');
+    trigger.addEventListener('click', (e) => {
         e.preventDefault();
-        let overlayOne = new NovicellOverlay({
-            selector: trigger.getAttribute('data-element'),
+        const overlayOne = new NovicellOverlay({
+            selector: '#flafOverlay',
             className: 'selector-overlay',
-            onCreate: function () {
+            videoId: 'Bs3RLRF5akk',
+            type: 'youtube',
+            onCreate() {
                 console.log('created');
             },
-            onLoaded: function () {
+            onLoaded() {
                 console.log('loaded');
             },
-            onDestroy: function () {
+            onDestroy() {
                 console.log('Destroyed');
-            }
-        })
+            },
+        });
         overlayOne.create();
     });
-    // Video overlay
-    let videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
-    for (let i = 0; i < videoOverlayTriggers.length; i++) {
-        videoOverlayTriggers[i].addEventListener('click', (e)=>{
-            e.preventDefault();
-            let currentTrigger = e.target;
-            let overlayVideo = new NovicellOverlay({
-                // element: currentTrigger,
-                videoId: currentTrigger.getAttribute("data-video-id"),
-                type: currentTrigger.getAttribute('data-type'),
-                autoplay: 1,
-                className: "video-overlay",
-                isVideo: true
-            })
-            overlayVideo.create();
-        });
-    }
 });
+
 ```
 
-## Possible properties
+## Options
 ```javascript
-let overlay = new NovicellOverlay({
+const overlay = new NovicellOverlay({
     'videoId': '9bZkp7q19f0',                               // [string] Youtube or Vimeo video id
     'isVideo': true                                         // [boolean] Determines if video. Default is false
     'type': 'youtube',                                      // [string] 'youtube' or 'vimeo'
@@ -115,5 +96,12 @@ let overlay = new NovicellOverlay({
     'onLoaded': function(){},                               // [function] runs on load
     'onDestroy': function(){}                               // [function] runs on destroy
 });
-
 ```
+
+## Contribution
+
+Looking to contribute something? Here's how you can help. Please take a moment to review our [contribution guidelines](https://github.com/Novicell/novicell-frontend/wiki/Contribution-guidelines) in order to make the contribution process easy and effective for everyone involved.
+
+## License
+
+The Novicell Frontend is licensed under the MIT license. (http://opensource.org/licenses/MIT)

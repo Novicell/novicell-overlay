@@ -52,7 +52,7 @@ export default class NovicellOverlay {
   
         // Check if content comes from a DOM selector
         if (
-          Object.prototype.hasOwnProperty.call('selector')
+          Object.prototype.hasOwnProperty.call(this, 'selector')
                   && this.selector !== null
         ) {
           const currElement = document.querySelector(this.selector);
@@ -67,7 +67,7 @@ export default class NovicellOverlay {
           }
         } else if (
         // Check if content comes from a HTML element
-          Object.prototype.hasOwnProperty.call('element')
+          Object.prototype.hasOwnProperty.call(this, 'element')
                   && this.element !== null
         ) {
           // let element = this.element;
@@ -181,7 +181,7 @@ export default class NovicellOverlay {
         this.overlayElem.id = 'js-novi-overlay';
   
         // Set class for the overlay, if set in options
-        if (Object.prototype.hasOwnProperty.call('className')) {
+        if (Object.prototype.hasOwnProperty.call(this, 'className')) {
           this.overlayElem.classList.add(this.className);
         }
   

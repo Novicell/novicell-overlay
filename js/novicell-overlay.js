@@ -47,23 +47,19 @@ export default class NovicellOverlay {
     this.closeButtonText = closeButtonText;
 
     this.create = function create() {
-      console.log(1);
       // call onCreate callback
       if (typeof this.onCreate === 'function') {
         this.onCreate();
       }
       // Remove existing overlays
       this.destroy();
-      console.log(2);
 
       // Check if content comes from a DOM selector
-      console.log(Object.prototype.hasOwnProperty.call(this, 'selector'));
       if (
         Object.prototype.hasOwnProperty.call(this, 'selector')
                 && this.selector !== null
       ) {
         const currElement = document.querySelector(this.selector);
-        console.log(3);
 
         if (currElement) {
           this.content = currElement.innerHTML;
@@ -103,7 +99,7 @@ export default class NovicellOverlay {
         const iframe = document.createElement('iframe');
         iframe.setAttribute('src', src);
         iframe.setAttribute('frameborder', 0);
-        iframe.setAttribute('allow', 'autoplay');
+        iframe.setAttribute('allow', 'autoplay; fullscreen');
         iframe.setAttribute('allowfullscreen', '');
         iframe.setAttribute('width', '100%');
         iframe.setAttribute('height', '100%');
@@ -167,10 +163,7 @@ export default class NovicellOverlay {
       this.backdrop.id = 'js-novi-backdrop';
 
       this.backdrop.addEventListener('click', (e) => {
-        if (
-          e.target.classList.contains('novi-overlay')
-                    || e.target.classList.contains('novi-overlay__container')
-        ) {
+        if (e.target.classList.contains('novi-overlay') || e.target.classList.contains('novi-overlay__container')) {
           this.destroy();
         }
       });
@@ -180,8 +173,8 @@ export default class NovicellOverlay {
     };
 
     /*
-         * Helper functions for HTML elements
-         */
+    * Helper functions for HTML elements
+    */
     this.setupOverlay = function setupOverlay() {
       // Create the overlay
       this.overlayElem = document.createElement('div');
@@ -194,7 +187,6 @@ export default class NovicellOverlay {
       }
 
       // Add overlay to overlay element
-      // document.querySelector('body').appendChild(overlayElem);
       this.backdrop.appendChild(this.overlayElem);
     };
 
@@ -246,7 +238,6 @@ export default class NovicellOverlay {
         svgIcon.classList.add('novi-overlay-close__default-icon');
         btnClose.appendChild(svgIcon);
       }
-      //   btnClose.appendChild(closeButtonIcon);
 
       if (this.closeButtonText) {
         const text = document.createElement('span');
@@ -266,14 +257,13 @@ export default class NovicellOverlay {
           this.destroy();
         }
       });
-      console.log('btnClose', btnClose);
       // Add close button to overlay element
       this.overlayContent.appendChild(btnClose);
     };
 
     /*
-         * Helper functions for getting content
-         */
+    * Helper functions for getting content
+    */
     this.get = function get(url) {
       // Return a new promise.
       return new Promise(((resolve, reject) => {

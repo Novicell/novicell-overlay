@@ -24,6 +24,7 @@ export default class NovicellOverlay {
       videoId = null,
       element = null,
       autoplay = null,
+      disableTracking = null
     }) {
       this.className = className;
       this.selector = selector;
@@ -41,6 +42,8 @@ export default class NovicellOverlay {
       this.element = element;
       this.content = content;
       this.autoplay = autoplay;
+      this.disableTracking = disableTracking;
+
   
       this.create = function create() {
         // call onCreate callback
@@ -86,9 +89,14 @@ export default class NovicellOverlay {
           let src = '';
           this.isVideo = true;
           if (this.type === 'vimeo') {
-            src = `https://player.vimeo.com/video/${this.videoId}?autoplay=${this.autoplay}&loop=1&muted=1`;
+            src = `https://player.vimeo.com/video/${this.videoId}?autoplay=${this.autoplay}&loop=1&muted=1&dnt=${this.disableTracking}`;
           } else if (this.type === 'youtube') {
-            src = `https://www.youtube.com/embed/${this.videoId}?autoplay=${this.autoplay}&rel=0`;
+              if (this.disableTracking) {
+                src = 'https://www.youtube-nocookie.com/';
+              } else {
+                src = 'https://www.youtube.com/';
+              }
+            src += `embed/${this.videoId}?autoplay=${this.autoplay}&rel=0`;
           } else {
             return;
           }

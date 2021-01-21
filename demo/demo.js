@@ -1,7 +1,9 @@
 import NovicellOverlay from '../dist/novicell-overlay.esm.js';
+
 document.addEventListener("DOMContentLoaded", function () {
     // Select your overlay trigger
     let trigger = document.querySelector('#js-overlay-trigger');
+    
     trigger.addEventListener('click', function (e) {
         e.preventDefault();
         let overlayOne = new NovicellOverlay({
@@ -19,8 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         overlayOne.create();
     });
+    
     // Video overlay
     let videoOverlayTriggers = document.querySelectorAll('.js-video-overlay-trigger');
+    
     for (let i = 0; i < videoOverlayTriggers.length; i++) {
         videoOverlayTriggers[i].addEventListener('click', (e) => {
             e.preventDefault();
@@ -31,7 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 type: currentTrigger.getAttribute('data-type'),
                 autoplay: 1,
                 className: "video-overlay",
-                isVideo: true
+                isVideo: true,
+                disableTracking: currentTrigger.getAttribute('data-disable-tracking')
             })
             overlayVideo.create();
         });

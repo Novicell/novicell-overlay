@@ -243,8 +243,8 @@ export default class NovicellOverlay {
       };
   
       /*
-           * Helper functions for getting content
-           */
+      * Helper functions for getting content
+      */
       this.get = function get(url) {
         // Return a new promise.
         return new Promise(((resolve, reject) => {

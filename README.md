@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             className: 'selector-overlay',
             videoId: 'Bs3RLRF5akk',
             type: 'youtube',
+            disableTracking: true,
             onCreate() {
                 console.log('created');
             },
@@ -88,6 +89,7 @@ const overlay = new NovicellOverlay({
     'videoId': '9bZkp7q19f0',                               // [string] Youtube or Vimeo video id
     'isVideo': true                                         // [boolean] Determines if video. Default is false
     'type': 'youtube',                                      // [string] 'youtube' or 'vimeo'
+    'disableTracking': true,                                // [boolean] Disable tracking from video hosts. Default is false
     'className': 'video-overlay',                           // [string] class for overlay
     'autoplay': 1,                                          // [number] 0 or 1, turns on/off autoplay for vimeo and youtube
     'selector': '#js-overlay-content',                      // [string] javascript selector for content to go in overlay (overrides video)
@@ -104,4 +106,4 @@ Looking to contribute something? Here's how you can help. Please take a moment t
 
 ## License
 
-The Novicell Frontend is licensed under the MIT license. (http://opensource.org/licenses/MIT)
+The Novicell Overlay is licensed under the MIT license. (http://opensource.org/licenses/MIT)
